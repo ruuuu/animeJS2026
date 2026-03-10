@@ -3,7 +3,72 @@ const mainData = () => {
 
   const renderAnimeList = (array, ganres) => {
 
+    const wrapper = document.querySelector('.product .col-lg-8');
+    wrapper.innerHTML = '';
+    
+    ganres.forEach((ganre) => {
+        const productBlock = document.createElement('div');
+        productBlock.classList.add('mb-5');
+
+        const listBlock = document.createElement('div');    // контенйер для картчоек опр категрии
+
+        listBlock.classList.add('row')
+
+        const list = array.filter((item) => item.ganre === ganre);
+
+        productBlock.insertAdjacentHTML('afterbegin', `
+
+          <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <div class="section-title">
+                <h4> ${ganre} </h4>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+              <div class="btn__all">
+                <a href="/categories.html" class="primary-btn"> View All <span class="arrow_right"></span></a>
+              </div>
+            </div>
+          </div>
+        `);
+
+
+        list.forEach((item) => {
+          console.log(item)
+          listBlock.insertAdjacentHTML('afterbegin', `
+            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="${item.image}">
+                                        <div class="ep"> ${item.rating} / 10</div>
+                                        <div class="view"><i class="fa fa-eye"></i> ${item.views} </div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a href="/anime-details.html"> ${item.title} </a>
+                                        </h5>
+                                    </div>
+                                </div>
+            </div>
+          `);
+        });
+
+      
+        
+        
+        productBlock.append(listBlock)
+        wrapper.append(productBlock)
+
+        wrapper.querySelectorAll('.set-bg').forEach((elem) => {
+          elem.style.backgroundImage = `url(${elem.dataset.setbg})`;
+        });
+        
+        
+    }); // конец цикла по жанрам
   };
+
 
 
 
@@ -27,12 +92,11 @@ const mainData = () => {
     wrapper.querySelectorAll('.set-bg').forEach((elem) => {
         elem.style.backgroundImage = `url(${elem.dataset.setbg})`;
     });
-  
   };
 
 
 
-  fetch('./db.json')
+  fetch('./db.json') // НАЧАЛО
     .then((response) => {
       return response.json();
     })
@@ -47,8 +111,7 @@ const mainData = () => {
 
 
       renderAnimeList(data.anime, ganres);
-
-    })
+    });
 }
 
 
