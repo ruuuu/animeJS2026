@@ -19,9 +19,10 @@
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script src="./js/preloader.js" defer></script>
+
     <script src="./js/bg-elements.js" defer></script>
     <script src="./js/modal.js" defer></script>
+    <script src="./js/scrollToTop.js" defer></script>
     <script src="./js/mainData.js" defer></script>
     <!-- интерпретатор ставит на скачивание информаци из скрипта и наичнате читать верстку и код отрботате только тогда когд
      а вся верстка будет считана-->
@@ -30,7 +31,7 @@
 
 <body>
     <!-- Page Preloder -->
-    <div id="preloder" class="preloder">
+    <div id="preloder" class="preloder active">
         <div class="loader"></div>
     </div>
 
@@ -52,7 +53,7 @@
                                 <li class="active"><a href="./index.html">Homepage</a></li>
                                 <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
+                                        <!-- <li><a href="./categories.html">Categories</a></li> -->
                                     </ul>
                                 </li>
                             </ul>
@@ -130,7 +131,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="trending__product">
+                    <!-- <div class="trending__product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
                                 <div class="section-title">
@@ -239,6 +240,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="popular__product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
@@ -347,6 +350,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="recent__product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
@@ -456,6 +461,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="live__product">
                         <div class="row">
                             <div class="col-lg-8 col-md-8 col-sm-8">
@@ -564,8 +571,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
+
+
+
                 <div class="col-lg-4 col-md-6 col-sm-8">
                     <div class="product__sidebar">
                         <div class="product__sidebar__view">
@@ -573,7 +583,7 @@
                                 <h5>Top Views</h5>
                             </div>
                             <div class="filter__gallery">
-                                <div class="product__sidebar__view__item set-bg mix day years"
+                                <!-- <div class="product__sidebar__view__item set-bg mix day years"
                                     data-setbg="img/trending/trend-1.jpg">
                                     <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
@@ -604,7 +614,7 @@
                                     <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
                                     <h5><a href="/anime-details.html">Fate stay night unlimited blade works</a></h5>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -653,6 +663,7 @@
     <!-- Search model end -->
 
     <!-- Js Plugins -->
+    <!-- ПОДКЛЮЧИТЬ БИБЛИОТЕКИ ДЛЯ СКРОЛЛА scroll-polyfill -->
 </body>
 
 </html>

@@ -1,18 +1,18 @@
-const mainData = () => {
+const categoriesData = () => {
 
   const preloader = document.querySelector('.preloder')
 
   const renderGanreList = (ganres) => {
 
-    const dropdown = document.querySelector('.header__menu .dropdown');
+      const dropdown = document.querySelector('.header__menu .dropdown');
 
-    dropdown.innerHTML = '';
-    
-    ganres.forEach((ganre) => {
-      dropdown.insertAdjacentHTML('beforeend', `
-        <li><a href="./categories.html?ganre=${ganre}">${ganre}</a></li>
-      `);
-    });
+      dropdown.innerHTML = '';
+      
+      ganres.forEach((ganre) => {
+        dropdown.insertAdjacentHTML('beforeend', `
+          <li><a href="./categories.html?ganre=${ganre}">${ganre}</a></li>
+        `);
+      });
   }
   
 
@@ -20,7 +20,7 @@ const mainData = () => {
 
   const renderAnimeList = (array, ganres) => {
 
-    const wrapper = document.querySelector('.product .col-lg-8');
+    const wrapper = document.querySelector('.product-page .col-lg-8');
     wrapper.innerHTML = '';
     
     ganres.forEach((ganre) => {
@@ -30,7 +30,7 @@ const mainData = () => {
         const listBlock = document.createElement('div');    // контенйер для картчоек опр категрии
         listBlock.classList.add('row')
 
-        const list = array.filter((item) => item.ganre === ganre);
+        const list = array.filter((item) => item.tags.includes(ganre));
 
         productBlock.insertAdjacentHTML('beforeend', `
           <div class="row">
@@ -85,14 +85,15 @@ const mainData = () => {
 
         setTimeout(() => {
           preloader.classList.remove('active') // отключли лоадер
-        } , 500) 
+        }, 500)
+        
     }); // конец цикла по жанрам
   };
 
 
 
 
-  const renderTopnime = (array) => { // sideBar
+  const renderTopnime = (array) => {
 
     const wrapper = document.querySelector('.filter__gallery')
 
@@ -103,7 +104,7 @@ const mainData = () => {
         <div class="product__sidebar__view__item set-bg mix" data-setbg="${item.image}">
             <div class="ep">${item.rating} / 10</div>
             <div class="view"><i class="fa fa-eye"></i> ${item.views} </div>
-            <h5><a href="/anime-details.html?itemId=${item.id}">${item.title}</a></h5>
+            <h5><a href="/anime-details.html">${item.title}</a></h5>
         </div>
       `);
     });
@@ -122,18 +123,28 @@ const mainData = () => {
     })
     .then((data) => {
       const ganres = new Set();   // пустая коллекция {} (набор уникальных значений)
+      const ganreParams = new URLSearchParams(window.location.search).get('ganre') // ganre это query параметр  из http://127.0.0.1:5501/categories.html?ganre=%D0%A4%D1%8D%D0%BD%D1%82%D0%B5%D0%B7%D0%B8
+
 
       data.anime.forEach((item) => {
         ganres.add(item.ganre)
       });
 
-      
-
       renderTopnime(data.anime.sort((a, b) => b.views - a.views).slice(0, 5));
-      renderAnimeList(data.anime, ganres);
+
+      if(ganreParams){
+        renderAnimeList(data.anime, [ganreParams]);
+      }else{
+        renderAnimeList(data.anime, ganres);
+      }
+
+      
       renderGanreList(ganres);
     });
+
+
 }
 
 
-mainData();
+
+categoriesData()
